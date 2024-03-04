@@ -3,8 +3,6 @@ import random
 NUMBER_DIGITS = 3
 MAX_GUESS = 10
 
-
-
 def generate_secret_number():
     """Generates a secret number of digit NUMBER_DIGIT and returns it"""
 
@@ -14,7 +12,6 @@ def generate_secret_number():
     for i in range(NUMBER_DIGITS):
         secretNumber += numbers[i]
     return secretNumber
-
 
 def get_clues(guess, secret_num):
     """
