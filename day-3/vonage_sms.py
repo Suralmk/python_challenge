@@ -1,6 +1,6 @@
 import vonage
-
-client = vonage.Client(key="1cbd9558", secret="hUgNRIAdj9wI6fFA")
+from decouple import config
+client = vonage.Client(key=config("CLIENT_KEY"), secret=config("CLIENT_SECRET"))
 sms = vonage.Sms(client)
 
 def get_message():
