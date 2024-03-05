@@ -6,7 +6,10 @@ Students = db["Students"]
 Users = db["User"]
 Departments = db["Department"]
 
-Students.insert_one({
-    "name" : "Surafel Melaku",
-    "department":"Software Engineering"
+Users.insert_one({
+    "first_name" : "Surafel",
+    "last_name" : "Melaku",
+    "username": "sura",
+    "password": "120",
+    "role":"stu",
 })
