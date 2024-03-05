@@ -62,6 +62,16 @@ class User:
 
     def exit(self):
         sys.exit()
+    
+    def add_student(self):
+        print("Added")
+    def update_student(self):
+        print("updated")
+    def add_grade(self):
+        print("graded")
+    def delete_student(self):
+        print("deleted")
+
  
 class Student(User):
     """
@@ -102,14 +112,53 @@ class Staff(User):
 
     def show_menus(self):
         print(f"Hello {self.get_full_name}")
-        print("""
-            Student Menus:
-              1: Add Student
-              2: Update student
-              3: Add student Grade
-              4: Delete Student
-              5: exit
-            """)
+        while True:
+            print("""
+                Student Menus:
+                1: Add Student
+                2: Update student
+                3: Add student Grade
+                4: Delete Student
+                5: exit
+                """)
+            choice = input("Enter menu number!: ")
+            if int(choice) not in range(1, 6):
+                print("Please enter a valid choice")
+                continue
+            if choice == "1":
+                self.add_student()
+                continue
+            if choice == "2":
+                self.add_grade()
+                continue
+            elif choice == "3":
+                self.update_student()
+                continue
+            elif choice == "4":
+                self.delete_student()
+                continue
+            elif choice == "5":
+                self.exit()
+                break
+        
+    def add_student(self):
+        print("added")
+        return super().add_student()
+
+    def add_grade(self):
+        return super().add_grade()
+    
+    def update_student(self):
+        return super().update_student()
+    
+    def delete_student(self):
+        return super().delete_student()
+
+
+
+
+
+
 
 if __name__ == "__main__":
     user_detail = authenticate()
