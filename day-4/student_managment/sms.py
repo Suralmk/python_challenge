@@ -1,4 +1,4 @@
-from  connection import Students, Departments, Users
+from  connection import Grade, Users
 import sys
 """
 
@@ -57,21 +57,9 @@ class User:
             return self.first_name + " " + self.last_name
         return None
     
-    def show_grade(self):
-        print("4.0")
 
     def exit(self):
         sys.exit()
-    
-    def add_student(self):
-        print("Added")
-    def update_student(self):
-        print("updated")
-    def add_grade(self):
-        print("graded")
-    def delete_student(self):
-        print("deleted")
-
  
 class Student(User):
     """
@@ -142,33 +130,57 @@ class Staff(User):
                 break
         
     def add_student(self):
-        print("added")
-        return super().add_student()
+        print("""        ---------------------------------------
+                Adding a new Student user to the System
+               ------------------------------------------ """)
+        first_name = input("Enter irst name of the student?:")
+        last_name = input("Enter last name of the student?: ")
+        username = input("Enter username of the Student: ")
+        password = input("Create password for the student: ") 
+
+        try:
+            Users.insert_one({
+            "first_name":first_name,
+            "last_name":last_name,
+            "username": username,
+            "password":password,
+            "role":"stu"
+        })
+            print("STUDENT ADDED SUCCESFULLY!!")
+        except Exception as e:
+            print(e)
 
     def add_grade(self):
-        return super().add_grade()
+        username = input("ENter the username of the student: ")
+        grade = input("Enter the grade of the student ")
+        try:
+            Users.insert_one({
+            "username": username,
+            "grade":grade,
+        })
+            print(f"Grade for {username} added succesfully!")
+        except Exception as e:
+            print(e)
     
     def update_student(self):
-        return super().update_student()
+        pass
     
     def delete_student(self):
-        return super().delete_student()
-
-
-
-
-
-
+        pass
 
 if __name__ == "__main__":
-    user_detail = authenticate()
-    user = User(user_detail.get("first_name"), 
+    user_detail = authenticate()    
+    if user_detail.get("role") == "stu":
+        user = Student(user_detail.get("first_name"), 
                 user_detail.get("last_name"), 
                 user_detail.get("username"), 
                 user_detail.get("role"), 
                 user_detail.get("is_authenticated"))
-    
-    if user_detail.get("role") == "stu":
-        Student.show_menus(user)
+        user.show_menus()
     else:
-        Staff.show_menus(user)
+        user = Staff(user_detail.get("first_name"), 
+                user_detail.get("last_name"), 
+                user_detail.get("username"), 
+                user_detail.get("role"), 
+                user_detail.get("is_authenticated"))
+        user.show_menus()

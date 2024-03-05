@@ -2,9 +2,9 @@ from pymongo import MongoClient
 
 client = MongoClient("localhost", 27017)
 db = client["SMS"]
-Students = db["Students"]
+Grade = db["Grade"]
 Users = db["User"]
-Departments = db["Department"]
+
 
 # Users.insert_many([
 #     {
